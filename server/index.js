@@ -1,7 +1,7 @@
 require("dotenv").config(); 
 const express = require("express"); 
 const axios = require("axios"); 
-const countryCodes = require("./countries"); // cross origin issue for loading image can be handled in the frontend using *crossorigin="anonymous"* ATTR
+//const countryCodes = require("./countries"); // cross origin issue for loading image can be handled in the frontend using *crossorigin="anonymous"* ATTR
 
 
 const app = express(); 

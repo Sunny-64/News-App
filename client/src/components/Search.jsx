@@ -3,9 +3,10 @@ import countries from './countries'
 
 function Search() {
   return (
-    <div>
-      Search
-    </div>
+    <form className='search-bar my-8 text-center'>
+      <input type="text" name='search' className="search-box w-1/4 p-4" placeholder='Search News' />
+      <button type='button' className='btn'>Search</button>
+    </form>
   )
 }
 
