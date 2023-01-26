@@ -1,7 +1,7 @@
 import {React, useState, useEffect} from 'react'
 import EverythingCard from './EverythingCard'
 
-function Cards() {
+function AllNews() {
 
   const [data, setData] = useState([])
   
@@ -32,4 +32,4 @@ function Cards() {
   )
 }
 
-export default Cards
+export default AllNews
