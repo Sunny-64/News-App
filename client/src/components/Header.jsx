@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import Search from "./Search";
+import {Link} from 'react-router-dom'
 
-function Header() {
-  let links = ["All News", "Top-Headlines", "Country", "Dark Mode"];
+function Header(props) {
+  // let links = ["All News", "Top-Headlines", "Country", "Dark Mode"];
+  let links = [{label : "All News", path : "/"}, {label : "Top-Headlines", path:"/top-headlines"}, {label : "Country", path : ""}, {label : "Dark Mode", path : ""}]
   const [active, setActive] = useState(false);
   return (
     <header className="">
@@ -10,12 +12,12 @@ function Header() {
         <h3 className="font-bold md:basis-1/6 text-2xl xs:basis-4/12 z-50">News App</h3>
         
         <ul className={active ? "flex md:gap-14 xs:gap-12 lg:basis-3/6 md:basis-4/6 md:justify-end active" : "flex gap-14 lg:basis-3/6 md:basis-4/6 justify-end"}>
-          {links.map((element) => {
+          {links.map((element, index) => {
             return (
-              <li>
-                <a className="no-underline font-semibold" href="">
-                  {element}
-                </a>
+              <li key={index}>
+                <Link className="no-underline font-semibold" to={element.path}>
+                  {element.label}
+                </Link>
               </li>
             );
           })}
