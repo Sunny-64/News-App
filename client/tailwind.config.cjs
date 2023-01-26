@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {},
     screens: {
-      'xs': {'max' : '639px'},
+      'xs': {'max' : '640px'},
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
 
@@ -22,6 +22,11 @@ module.exports = {
 
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
+    },
+    colors : {
+      lightBg : "#E2E8F0",
+      lightBgPrimary : "#F8FAFC", 
+      lightBgSecondary : "#0F172A",
     }
   },
   plugins: [],
