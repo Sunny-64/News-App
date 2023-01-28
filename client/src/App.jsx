@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import TopHeadlines from "./components/TopHeadlines";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CountryNews from "./components/CountryNews";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AllNews />} />
           <Route path="/top-headlines" element={<TopHeadlines />} />
+          <Route path="/country/:iso" element={<CountryNews />} />
         </Routes>
         {/* <Cards />  */}
         <Footer />
