@@ -15,12 +15,12 @@ function Header(props) {
   const [showDropdown, setShowDropdown] = useState(false);
   return (
     <header className="">
-      <nav className="flex flex-row sm:justify-around items-center xs:justify-between xs:px-3">
+      <nav className="navigation flex flex-row sm:justify-around items-center xs:justify-between xs:px-3">
         <h3 className="font-bold md:basis-1/6 text-2xl xs:basis-4/12 z-50">News App</h3>
 
-        <ul className={active ? "nav-ul flex md:gap-14 xs:gap-12 lg:basis-3/6 md:basis-4/6 md:justify-end active" : " nav-ul flex gap-14 lg:basis-3/6 md:basis-4/6 justify-end"}>
-          <li><Link className="no-underline font-semibold" to="/">All News</Link></li>
-          <li><Link className="no-underline font-semibold" to="/top-headlines">Top-Headlines</Link></li>
+        <ul className={active ? "nav-ul flex gap-11 md:gap-14 xs:gap-12 lg:basis-3/6 md:basis-4/6 md:justify-end active" : " nav-ul flex gap-14 lg:basis-3/6 md:basis-4/6 justify-end"}>
+          <li><Link className="no-underline font-semibold" to="/" onClick={()=>{setActive(!active)}}>All News</Link></li>
+          <li><Link className="no-underline font-semibold" to="/top-headlines" onClick={()=>{setActive(!active)}}>Top-Headlines</Link></li>
 
 
           <li className="dropdown-li"><Link className="no-underline font-semibold flex items-center gap-2" onClick={() => { setShowDropdown(!showDropdown) }}>Country <FontAwesomeIcon className={showDropdown ? "down-arrow-icon down-arrow-icon-active" : "down-arrow-icon"} icon={faCircleArrowDown} /></Link>
@@ -28,7 +28,7 @@ function Header(props) {
               {countries.map((element, index) => {
                 return (
                   <li key={index} onClick={() => { setShowDropdown(!showDropdown) }}>
-                    <Link to={"/country/" + element.iso_2_alpha} className="flex gap-3" type="btn">
+                    <Link to={"/country/" + element.iso_2_alpha} className="flex gap-3" type="btn" onClick={() => {setActive(!active)}}>
                       <img crossOrigin="anonymous" className="flags" src={element.png} alt={element.iso_2_alpha} />
                       <span>{element.countryName}</span>
                     </Link>

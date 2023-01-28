@@ -149,6 +149,7 @@ footer{
         padding: 25% 10%;
         transition: 0.5s ease-in-out;
         justify-content: start !important;
+        height: 100vh;
     }
 
     .active {
@@ -172,6 +173,7 @@ ul li ul {
     visibility: hidden;
     opacity: 0;
     position: absolute;
+
     left: 0;
     display: none;
     background: white;
@@ -198,8 +200,10 @@ ul li ul {
     transform: rotate(-180deg);
   }
 .dropdown{
-    height: 20vw;
+    min-height: 10vh;
+    height: 40vh;
     overflow: auto;
+    top: 30px;
 }
   ul li ul li {
     clear: both;
