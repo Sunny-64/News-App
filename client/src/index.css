@@ -2,14 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+
+.light-theme {
     --background: #E2E8F0;
     --primary: #F8FAFC;
     --secondary: #0F172A;
+    --txt: #000;
+    --heading: #5f99be;
+    --btn-color: #fff;
+    --btn-background: #5f99be;
+    --search-background: #000;
 }
-html{
+
+.dark-theme {
+    --background: #27272a;
+    --primary: #18181b;
+    --secondary: #D5DDF0;
+    --txt: #fff;
+    --heading: #5f99be;
+    --btn-color: #000;
+    --btn-background: #5f99be;
+    --search-background: #18181b;
+
+}
+
+/* Common */
+* {
+    color: var(--txt);
+}
+
+html {
     scroll-behavior: smooth;
 }
+
 body {
     background-color: var(--background);
     min-width: 369px;
@@ -23,16 +48,83 @@ nav {
     background-color: var(--primary);
     height: 70px;
 }
-nav ul{
+
+.heading {
+    color: var(--heading)
+}
+
+nav ul {
     min-width: 378px;
 }
 
-.search-box {
-    background-color: var(--primary);
-    height: 50px;
+/* Dropdown menu */
+
+.dropdown-li {
+    position: relative;
 }
 
+ul li ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
 
+    left: 0;
+    display: none;
+    background: var(--primary);
+}
+
+.show-dropdown {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    min-width: 250px;
+    text-align: left;
+    padding-top: 20px;
+    /* box-shadow: 0px 3px 5px -1px #ccc; */
+    box-shadow: 0px 3px 5px -1px var(--heading);
+}
+
+.down-arrow-icon {
+    height: 16px;
+    width: 16px;
+    padding-top: 2px;
+    transition: 0.2s ease-in-out;
+}
+
+.down-arrow-icon>path {
+    color: var(--heading) !important;
+
+}
+
+.down-arrow-icon-active {
+    transform: rotate(-180deg);
+}
+
+.dropdown {
+    min-height: 10vh;
+    height: 50vh;
+    overflow: auto;
+    top: 30px;
+}
+
+ul li ul li {
+    clear: both;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+    border-style: none;
+}
+
+ul li ul li a:hover {
+    padding-left: 10px;
+    border-left: 2px solid #3ca0e7;
+    transition: all 0.3s ease;
+}
+
+.flags {
+    height: 30px;
+    width: 30px;
+}
 
 /* Menu icon */
 .ham-burger {
@@ -61,68 +153,75 @@ nav ul{
 .lines {
     width: 30px;
     height: 3px;
-    background: #000;
+    background: var(--heading);
     display: block;
     margin: 5px 0;
     transition: transform 1s, width 0.5s;
 }
 
 .search-box {
-    border: 1px solid #000;
-    background-color: #E2E8F0;
+    background: var(--primary);
+    height: 50px;
+    /* border: 1px solid var(--search-box-border); */
+    /* background-color: #E2E8F0; */
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
 
 .search-box:focus {
     outline: none;
-    border: 2px solid #000;
+    border: 2px solid var(--btn-background);
 }
 
 .btn {
-    background-color: var(--secondary);
-    color: #fff;
+    background-color: var(--heading);
+    color: var(--btn-color);
     width: 130.51px;
     height: 50px;
     border-top-right-radius: 4px;
+    margin-left: -2px;
     border-bottom-right-radius: 4px;
 }
 
 /* Everything Card  */
-.cards{
+.cards {
     line-break: anywhere;
 }
-.everything-card{
+
+.everything-card {
     width: 400px;
     border-radius: 8px;
     background: var(--primary);
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-.everything-card-img{
-    width : 280px; 
-    height : 150px; 
+
+.everything-card-img {
+    width: 280px;
+    height: 150px;
     object-fit: contain;
 
 }
 
-footer{
-    color: #fff;
+footer {
+    color: var(--btn-color);
+    background: var(--heading);
 }
 
 @media (max-width : 1024px) {
-    .cards{
+    .cards {
         place-items: center;
     }
 }
 
-@media only screen and (min-width : 640px ) and (max-width : 689px) {
-    nav{
+@media only screen and (min-width : 640px) and (max-width : 689px) {
+    nav {
         justify-content: space-between !important;
-        padding : 0 5% !important; 
+        padding: 0 5% !important;
     }
 }
+
 @media (max-width : 689px) {
-    
+
     .btn {
         width: 80px;
         height: 40px;
@@ -131,7 +230,7 @@ footer{
     .search-box {
         height: 39px;
         width: 70%;
-       
+
     }
 
     .ham-burger {
@@ -144,7 +243,7 @@ footer{
         left: 0;
         top: -200%;
         width: 100%;
-        background-color: #F8FAFC;
+        background-color: var(--background);
         z-index: 1;
         padding: 25% 10%;
         transition: 0.5s ease-in-out;
@@ -157,74 +256,13 @@ footer{
         top: 0;
     }
 
-    .everything-card{
-        width : 350px;
+    .everything-card {
+        width: 350px;
     }
 
 }
 
 
-/* Dropdown menu */
-
-.dropdown-li{
-    position: relative;
-}
-ul li ul {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-
-    left: 0;
-    display: none;
-    background: white;
-  }
-
-  .show-dropdown{
-    visibility: visible;
-    opacity: 1;
-    display: block;
-    min-width: 250px;
-    text-align: left;
-    padding-top: 20px;
-    box-shadow: 0px 3px 5px -1px #ccc;
-  }
-
-  .down-arrow-icon{
-    height: 16px;
-    width : 16px;
-    padding-top : 2px;
-    transition : 0.2s ease-in-out; 
-  }
-
-  .down-arrow-icon-active{
-    transform: rotate(-180deg);
-  }
-.dropdown{
-    min-height: 10vh;
-    height: 40vh;
-    overflow: auto;
-    top: 30px;
-}
-  ul li ul li {
-    clear: both;
-    width: 100%;
-    text-align: left;
-    margin-bottom: 20px;
-    border-style: none;
-  }
-
-  ul li ul li a:hover {
-    padding-left: 10px;
-    border-left: 2px solid #3ca0e7;
-    transition: all 0.3s ease;
-  }
-
-  .flags{
-    height: 30px;
-    width: 30px;
-  }
 
 
-  /* alternative */
-
- 
+/* alternative */

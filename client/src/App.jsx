@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CountryNews from "./components/CountryNews";
 
 function App() {
+  
   return (
     <div className="w-full">
       <BrowserRouter>

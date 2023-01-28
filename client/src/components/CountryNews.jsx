@@ -36,12 +36,6 @@ function CountryNews() {
         source={element.source.name} key={index}
       />
       })}
-
-      {/* <EverythingCard 
-           title ="tt" description = "dd" imgUrl ="url"
-        publishedAt = "date" url ="url" author="auth"
-        source="sos" key={1}
-      /> */}
     </div>
   )
 }
