@@ -17,6 +17,11 @@ cd client/
 npm install
 npm run dev
 ```
+- In Case of CORS error, Add the following line in the package.json file -:
+
+```
+  "proxy": "http://localhost:3000",
+```
 
 #### Install the server side dependencies
 
@@ -25,6 +30,16 @@ npm run dev
 ```
 cd server/
 npm install
+```
+
+- Get the API Key from <a href="newsapi.org">newsapi.org</a>.
+- Create a file named <strong>.env</strong> inside server folder
+- Add the following in the .env file -:
+```
+API_KEY = <Your API Key>
+```
+- Now run the command to run the project-: 
+```
 npm start
 ```
 
