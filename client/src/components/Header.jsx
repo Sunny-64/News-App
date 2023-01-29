@@ -51,8 +51,6 @@ function Header() {
                 })}
               </ul>
           </li>
-
-
           <li className="dropdown-li"><Link className="no-underline font-semibold flex items-center gap-2" onClick={() => { setShowCountryDropdown(!showCountryDropdown); setShowCategoryDropdown(false)}}>Country <FontAwesomeIcon className={showCountryDropdown ? "down-arrow-icon down-arrow-icon-active" : "down-arrow-icon"} icon={faCircleArrowDown} /></Link>
             <ul className={showCountryDropdown ? "dropdown p-2 show-dropdown" : "dropdown p-2"}>
               {countries.map((element, index) => {
@@ -70,7 +68,7 @@ function Header() {
               })}
             </ul>
           </li>
-          <li><Link className="no-underline font-semibold" to="/" onClick={()=> {toggleTheme()}}>Dark Mode</Link></li>
+          <li><Link className="no-underline font-semibold" to="#" onClick={()=> {toggleTheme()}}>Dark Mode</Link></li>
         </ul>
         <div className={active ? "ham-burger z-index-100 ham-open" : "ham-burger z-index-100"} onClick={() => { setActive(!active) }}>
           <span className="lines line-1"></span>
