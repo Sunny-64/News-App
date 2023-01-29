@@ -1,87 +1,128 @@
-require("dotenv").config(); 
-const express = require("express"); 
-const axios = require("axios"); 
-const cors = require("cors"); 
-//const countryCodes = require("./countries"); // cross origin issue for loading image can be handled in the frontend using *crossorigin="anonymous"* ATTR
-const app = express(); 
+require("dotenv").config();
+const express = require("express");
+const axios = require("axios");
+const cors = require("cors");
+const app = express();
 
-app.use(cors())
+app.use(cors());
 
-app.use(express.urlencoded({extended : true})); 
+app.use(express.urlencoded({ extended: true }));
 
-
-app.get("/all-news", (req, res)=>{
-    const country = req.body.country; // provide The 2-letter ISO 3166-1 code of the country
-    let url = `https://newsapi.org/v2/everything?q=everything&apiKey=${process.env.API_KEY}`
-    axios.get(url)
-    .then(response=>{
+app.get("/all-news", (req, res) => {
+  let pageSize = parseInt(req.query.pageSize);
+  let page = parseInt(req.query.page);
+  if (page === undefined || page <= 0) {
+    page = 1;
+  }
+  //   let url = `https://newsapi.org/v2/everything?q=page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`;
+  let url = `https://newsapi.org/v2/everything?q=page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`;
+  axios
+    .get(url)
+    .then((response) => {
+      if (response.data.totalResults > page) {
         res.json({
-            status : 200, 
-            success : true, 
-            message : "Successfully fetched the data", 
-            data :  response.data
-        })
+          status: 200,
+          success: true,
+          message: "Successfully fetched the data",
+          data: response.data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          success: true,
+          message: "No more results to show",
+        });
+      }
     })
     .catch(function (error) {
-        // handle error
-        res.json({
-            status : 500, 
-            success : false, 
-            message : "Failed to fetch Data form the API", 
-            error : error
-        })
-    })
-})
+      // handle error
+      res.json({
+        status: 500,
+        success: false,
+        message: "Failed to fetch Data form the API",
+        error: error,
+      });
+    });
+});
+app.options("/top-headlines", cors());
 
-app.get("/top-headlines", (req, res)=>{
-    // const country = req.body.country; // provide The 2-letter ISO 3166-1 code of the country
-    let url = `https://newsapi.org/v2/top-headlines/sources?apiKey=${process.env.API_KEY}`
-    axios.get(url)
-    .then(response=>{
+
+app.get("/top-headlines", (req, res) => {
+  let pageSize = parseInt(req.query.pageSize);
+  let page = parseInt(req.query.page);
+  let category = req.query.category; 
+  if (page === undefined || page <= 0) {
+    page = 1;
+  }
+  let url = `https://newsapi.org/v2/top-headlines?category=${category}&language=en&page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`;
+  axios
+    .get(url)
+    .then((response) => {
+      if (response.data.totalResults > page) {
         res.json({
-            status : 200, 
-            success : true, 
-            message : "Successfully fetched the data", 
-            data : response.data
-        })
+          status: 200,
+          success: true,
+          message: "Successfully fetched the data",
+          data: response.data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          success: true,
+          message: "No more results to show",
+        });
+      }
     })
     .catch(function (error) {
-        // handle error
-        res.json({
-            status : 500, 
-            success : true, 
-            message : "Failed to fetch Data form the API", 
-            error : error
-        })
-    })
-})
-app.options('/country/:iso', cors());
+      // handle error
+      res.json({
+        status: 500,
+        success: true,
+        message: "Failed to fetch Data form the API",
+        error: error,
+      });
+    });
+});
 
-app.get("/country/:iso", (req, res)=>{
-    const country = req.params.iso; // provide The 2-letter ISO 3166-1 code of the country
-    let url = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${process.env.API_KEY}`
-    axios.get(url)
-    .then(response=>{
+app.options("/country/:iso", cors());
+
+app.get("/country/:iso", (req, res) => {
+  let pageSize = parseInt(req.query.pageSize);
+  let page = parseInt(req.query.page);
+  if (page === undefined || page <= 0) {
+    page = 1;
+  }
+  const country = req.params.iso; // provide The 2-letter ISO 3166-1 code of the country
+  let url = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${process.env.API_KEY}&page=${page}&pageSize=${pageSize}`;
+  axios
+    .get(url)
+    .then((response) => {
+      if (response.data.totalResults > page) {
         res.json({
-            status : 200, 
-            success : true, 
-            message : "Successfully fetched the data", 
-            data : response.data
-        })
-        // console.log(response.data);
-        // res.send(response.data);
+          status: 200,
+          success: true,
+          message: "Successfully fetched the data",
+          data: response.data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          success: true,
+          message: "No more results to show",
+        });
+      }
     })
     .catch(function (error) {
-        // handle error
-        res.json({
-            status : 500, 
-            success : true, 
-            message : "Failed to fetch Data form the API", 
-            error : error
-        })
-    })
-})
+      // handle error
+      res.json({
+        status: 500,
+        success: true,
+        message: "Failed to fetch Data form the API",
+        error: error,
+      });
+    });
+});
 
-app.listen(3000, function(){
-    console.log("Server is running at port 3000"); 
-})
+app.listen(3000, function () {
+  console.log("Server is running at port 3000");
+});

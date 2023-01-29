@@ -10,9 +10,11 @@ import { faCircleArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
   const [active, setActive] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [theme, setTheme] = useState("light-theme"); 
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [showCategoryDropdown, setShowCategoryDropdown] = useState(false); 
 
+  const [theme, setTheme] = useState("light-theme"); 
+  let category = ["business","entertainment","general","health","science","sports","technology"]
   useEffect(()=> {
     document.body.className = theme; 
   },[theme])
@@ -31,15 +33,35 @@ function Header() {
 
         <ul className={active ? "nav-ul flex gap-11 md:gap-14 xs:gap-12 lg:basis-3/6 md:basis-4/6 md:justify-end active" : " nav-ul flex gap-14 lg:basis-3/6 md:basis-4/6 justify-end"}>
           <li><Link className="no-underline font-semibold" to="/" onClick={()=>{setActive(!active)}}>All News</Link></li>
-          <li><Link className="no-underline font-semibold" to="/top-headlines" onClick={()=>{setActive(!active)}}>Top-Headlines</Link></li>
+          <li className="dropdown-li"><Link className="no-underline font-semibold flex items-center gap-2" onClick={()=>{setShowCategoryDropdown(!showCategoryDropdown); setShowCountryDropdown(false)}}>Top-Headlines <FontAwesomeIcon className={showCategoryDropdown ? "down-arrow-icon down-arrow-icon-active" : "down-arrow-icon"} icon={faCircleArrowDown} /></Link>
+
+            <ul className={showCategoryDropdown ? "dropdown p-2 show-dropdown" : "dropdown p-2"}>
+                {category.map((element, index) => {
+                  return (
+                    <li key={index} onClick={() => { setShowCategoryDropdown(!showCategoryDropdown) }}>
+
+                      <Link to={"/top-headlines/" + element} className="flex gap-3 capitalize" type="btn" 
+                      onClick={() =>{
+                        setActive(!active) 
+                      }}>
+                        {element}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+          </li>
 
 
-          <li className="dropdown-li"><Link className="no-underline font-semibold flex items-center gap-2" onClick={() => { setShowDropdown(!showDropdown) }}>Country <FontAwesomeIcon className={showDropdown ? "down-arrow-icon down-arrow-icon-active" : "down-arrow-icon"} icon={faCircleArrowDown} /></Link>
-            <ul className={showDropdown ? "dropdown p-2 show-dropdown" : "dropdown p-2"}>
+          <li className="dropdown-li"><Link className="no-underline font-semibold flex items-center gap-2" onClick={() => { setShowCountryDropdown(!showCountryDropdown); setShowCategoryDropdown(false)}}>Country <FontAwesomeIcon className={showCountryDropdown ? "down-arrow-icon down-arrow-icon-active" : "down-arrow-icon"} icon={faCircleArrowDown} /></Link>
+            <ul className={showCountryDropdown ? "dropdown p-2 show-dropdown" : "dropdown p-2"}>
               {countries.map((element, index) => {
                 return (
-                  <li key={index} onClick={() => { setShowDropdown(!showDropdown) }}>
-                    <Link to={"/country/" + element.iso_2_alpha} className="flex gap-3" type="btn" onClick={() => {setActive(!active)}}>
+                  <li key={index} onClick={() => { setShowCountryDropdown(!showCountryDropdown) }}>
+                    <Link to={"/country/" + element.iso_2_alpha} className="flex gap-3" type="btn" 
+                    onClick={() =>{
+                      setActive(!active) 
+                    }}>
                       <img crossOrigin="anonymous" className="flags" src={element.png} alt={element.iso_2_alpha} />
                       <span>{element.countryName}</span>
                     </Link>
@@ -56,7 +78,7 @@ function Header() {
           <span className="lines line-3"></span>
         </div>
       </nav>
-      <Search />
+      {/* <Search /> */}
     </header>
   );
 }
