@@ -9,10 +9,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/all-news", (req, res) => {
-  let pageSize = parseInt(req.query.pageSize);
-  let page = parseInt(req.query.page);
-  if (page === undefined || page <= 0) {
+  let pageSize = parseInt(req.query.pageSize) || 0;
+  let page = parseInt(req.query.page) || 0;
+  if (pageSize === undefined || page === undefined || page <= 0) {
     page = 1;
+    pageSize = 80;
   }
   //   let url = `https://newsapi.org/v2/everything?q=page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`;
   let url = `https://newsapi.org/v2/everything?q=page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`;
@@ -46,11 +47,10 @@ app.get("/all-news", (req, res) => {
 });
 app.options("/top-headlines", cors());
 
-
 app.get("/top-headlines", (req, res) => {
   let pageSize = parseInt(req.query.pageSize);
   let page = parseInt(req.query.page);
-  let category = req.query.category; 
+  let category = req.query.category;
   if (page === undefined || page <= 0) {
     page = 1;
   }
