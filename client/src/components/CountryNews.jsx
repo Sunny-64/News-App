@@ -18,7 +18,7 @@ function CountryNews() {
   const pageSize = 15;
   useEffect(() => {
     setIsLoading(true); 
-    fetch(`http://localhost:3000/country/${params.iso}?page=${page}&pageSize=${pageSize}`)
+    fetch(`https://news-app-seven-delta.vercel.app/country/${params.iso}?page=${page}&pageSize=${pageSize}`)
     .then(response=> {
       // console.log(response) 
       if(response.ok){
