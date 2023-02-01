@@ -48,11 +48,11 @@ app.get("/all-news", (req, res) => {
 app.options("/top-headlines", cors());
 
 app.get("/top-headlines", (req, res) => {
-  let pageSize = parseInt(req.query.pageSize);
-  let page = parseInt(req.query.page);
-  let category = req.query.category;
-  if (page === undefined || page <= 0) {
+  let pageSize = parseInt(req.query.pageSize) || 0;
+  let page = parseInt(req.query.page) || 0;
+  if (pageSize === undefined || page === undefined || page <= 0) {
     page = 1;
+    pageSize = 80;
   }
   let url = `https://newsapi.org/v2/top-headlines?category=${category}&language=en&page=${page}&pageSize=${pageSize}&apiKey=${process.env.API_KEY}`;
   axios
@@ -87,10 +87,11 @@ app.get("/top-headlines", (req, res) => {
 app.options("/country/:iso", cors());
 
 app.get("/country/:iso", (req, res) => {
-  let pageSize = parseInt(req.query.pageSize);
-  let page = parseInt(req.query.page);
-  if (page === undefined || page <= 0) {
+  let pageSize = parseInt(req.query.pageSize) || 0;
+  let page = parseInt(req.query.page) || 0;
+  if (pageSize === undefined || page === undefined || page <= 0) {
     page = 1;
+    pageSize = 80;
   }
   const country = req.params.iso; // provide The 2-letter ISO 3166-1 code of the country
   let url = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${process.env.API_KEY}&page=${page}&pageSize=${pageSize}`;
