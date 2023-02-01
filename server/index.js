@@ -50,6 +50,7 @@ app.options("/top-headlines", cors());
 app.get("/top-headlines", (req, res) => {
   let pageSize = parseInt(req.query.pageSize) || 0;
   let page = parseInt(req.query.page) || 0;
+  let category = req.query.category || "business";
   if (pageSize === undefined || page === undefined || page <= 0) {
     page = 1;
     pageSize = 80;
