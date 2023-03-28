@@ -193,7 +193,7 @@ ul li ul li a:hover {
 
 /* Everything Card  */
 .cards {
-    line-break: anywhere;
+    /* line-break: anywhere; */
 }
 
 .everything-card {
