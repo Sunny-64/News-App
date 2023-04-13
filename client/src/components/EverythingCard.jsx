@@ -9,10 +9,10 @@ function Card(props) {
           <img className="everything-card-img" src={props.imgUrl} alt="img" />
         </div>
         <div className="description">
-          <p className="description-text leading-7">{props.description}</p>
+          <p className="description-text leading-7">{props.description.substring(0,200)}</p>
         </div>
         <div className="info">
-          <p className="url mb-2"><span className='font-semibold'>url : </span><a href={props.url} target="_blank" className="link underline">{props.url.substring(0,100)}</a></p>
+          <p className="url mb-2"><span className='font-semibold'>url : </span><a href={props.url} target="_blank" className="link underline break-words">{props.url.substring(0,70)}</a></p>
           <div className="origin flex justify-between flex-wrap">
             <p><span className='font-semibold'>Source :</span>{props.source}</p>
             <p><span className="font-semibold">Author :</span>{props.author}</p>
