@@ -71,17 +71,16 @@ function Header() {
               {countries.map((element, index) => {
                 return (
                   <li key={index} onClick={() => { setShowCountryDropdown(!showCountryDropdown) }}>
-                    <Link to={"/country/" + element.iso_2_alpha} className="flex gap-3" type="btn"
+                    <Link to={"/country/" + element?.iso_2_alpha} className="flex gap-3" type="btn"
                       onClick={() => {
                         setActive(!active)
                       }}>
-                      {/* <img crossOrigin="anonymous" className="flags" src={element?.png} alt={element.iso_2_alpha} /> */}
                       <img
                         src={element?.png}
                         srcset={`https://flagcdn.com/32x24/${element?.iso_2_alpha}.png 2x`}
                    
-                        alt="Ukraine" />
-                      <span>{element.countryName}</span>
+                        alt={element?.countryName} />
+                      <span>{element?.countryName}</span>
                     </Link>
                   </li>
                 )
