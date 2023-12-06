@@ -22,7 +22,8 @@ function CountryNews() {
     .then(response=> {
       // console.log(response) 
       if(response.ok){
-        // console.log(response.clone().json());
+        console.log(response.clone().json());
+
         return response.clone().json();
       }
     })

@@ -256,9 +256,12 @@ var isoCountries = {
 
 let countries = []; 
 twoLetterISO.forEach(element => {
+    // console.log(">>>>>>>>>>>element",element)
     let obj = {
         iso_2_alpha : element,
-        png : "https://countryflagsapi.com/png/" + element,
+        // 
+        png : `https://flagcdn.com/24x18/${element}.png`,
+        // png : "https://countryflagsapi.com/png/" + element,
         countryName : getCountryName(element.toUpperCase()),
     }
     countries.push(obj); 
@@ -271,5 +274,7 @@ function getCountryName (countryCode) {
         return countryCode;
     }
 }
+
+console.log(countries)
 
 export default countries; 
